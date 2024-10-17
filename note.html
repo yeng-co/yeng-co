@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class=" jrboxfutp idc0_350"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墓場</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400&display=swap');
+
+        body {
+            background-color: white;
+            font-size: 120%;
+            font-family: 'M PLUS 1p', sans-serif;
+        }
+        .header {
+            background-color: white;
+            font-size: 30px;
+            color: #000;
+            text-align: left;
+
+        }
+        .nav-menu {
+            overflow: hidden;
+            background-color: black;
+        }
+        .nav-menu a {
+            font-size: 15px;
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav-menu a:hover {
+            background-color: white;
+            color: black;
+        }
+        li {
+            font-size: 105%;
+            color: black;
+        }
+        hr {
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+        h2 {
+            font-size: 30px;
+            color: black;
+            text-align: center;
+        }
+        h3 {
+            font-size: 22px; /* テキストサイズを少し小さく */
+            color: black;
+            border: 4px solid black; /* 線を太く */
+            border-radius: 20px; /* 丸みを増やす */
+            padding: 5px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: normal;
+        }
+        .scrollable-list {
+            width: 95%;
+            height: 300px;
+            overflow-y: scroll;
+            background-color: #dddddd;
+            padding: 15px;
+        }
+        ol {
+            padding-left: 20px;
+            margin: 25px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .button {
+            display: inline-block;
+            padding: 7px 20px; 
+            border: 3px solid #000000;
+            border-radius: 40px;
+            font-family: "M PLUS 1p", sans-serif;
+            color: black;
+            background-color: white;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 18px; 
+            font-weight: 600;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: block;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+  <h1>墓場</h1>
+  <hr size="10px" color="black">
+</div>
+
+<div class="nav-menu">
+  <a href="index.html">ホーム</a>
+  <a href="profile.html">プロフィール</a>
+  <a href="Gallery.html">つくったもの</a>
+  <a href="note.html">つぶやき</a>
+  <a href="banner.html">バナー</a>
+</div>
+<hr size="10px" color="black">
+<h2>つぶやき</h2>
+<h3>SNS代理</h3>
+<ul>
+    <li>Twitterが死んだらここに書く</li>
+    <li>読書記録をCSVでダウンロードできるようにしました。</li>
+    <li>ISBNの存在する書籍の詳細としてGoogleブックスのページをリンクしました。（APIを使っているので結構時間かかります。要修正）</li>
+    <li>GoogleBooksAPIから取得できた説明をCSVに追加しました。</li>
+    <li>CSVの要素にAPIから取得したものが含まれているので、リンク処理が終わるまでダウンロードできないかもしれません。処理完了のダイアログ後にお願いします。</li>
+</ul>
+<h3>読書記録(2024/01/01~)</h3>
+<center><div class="scrollable-list">
+    <ol id="myList" class="hidden">
+    <li data-isbn="9784004120995">ピーター・トラッドギル『言語と社会』</li>
+    <li data-isbn="9784041126066">ラフカディオ・ハーン『怪談』</li>
+    <li data-isbn="9784003422816">マルセル・モース『贈与論 他二篇』</li>
+    <li data-isbn="9784152098061">飛浩隆『零號琴』</li>
+    <li data-isbn="9784120044243">クロード・レヴィ=ストロース『月の裏側 日本文化への視角』</li>
+    <li data-isbn="9784150311483">下永聖高『オニキス』</li>
+    <li data-isbn="9784163918945">円城塔『コード・ブッダ 機械仏教史縁起』</li>
+    <li data-isbn="9784047380448">背筋『穢れた聖地巡礼について』</li>
+    <li data-isbn="9784480083074">ロラン・バルト『表徴の帝国』</li>
+    <li data-isbn="9784150311506">円城塔『バナナ剥きには最適の日々』</li>
+    <li data-isbn="9784003369524">ノーム・チョムスキー『統辞理論の諸相：方法論序説』</li>
+    <li data-isbn="9784061488984">橋爪大三郎『はじめての構造主義』</li>
+    <li data-isbn="9784151843518">陸秋槎『文学少女対数学少女』</li>
+    <li data-isbn="9784152103581">春暮康一『一億年のテレスコープ』</li>
+    <li data-isbn="9784003394618">エルヴィン・シュレーディンガー『生命とは何か 物理的にみた生細胞』</li>
+    <li data-isbn="9784150115319">グレッグ・イーガン『ディアスポラ』</li>
+    <li data-isbn="9784150114510">グレッグ・イーガン『しあわせの理由』</li>
+    <li data-isbn="9784065274859">千葉雅也『現代思想入門』</li>
+    <li data-isbn="9784041150689">穂波了『月面にアームストロングの足跡は存在しない』</li>
+    <li data-isbn="9784199051548">山田正紀『イノセンス After The Long Goodbye』</li>
+    <li data-isbn="9784309622033">グレッグ・イーガン『TAP』</li>
+    <li data-isbn="9784152094476">グレゴリー・チャイティン『ダーウィンを数学で証明する』</li>
+    <li data-isbn="9784150103026">カート・ヴォネガット・ジュニア『スローターハウス5』</li>
+    <li data-isbn="9784781623375">梨『お前の死因にとびきりの恐怖を』</li>
+    <li data-isbn="9784794801555">ジャン・ギトン『神と科学：超実在論に向かって』</li>
+    <li data-isbn="9784488018443">円城塔『ムーンシャイン』</li>
+    <li data-isbn="9784065192801">佐藤究『サージウスの死神』</li>
+    <li data-isbn="9784061496354">谷徹『これが現象学だ』</li>
+    <li data-isbn="9784791751945">エトムント・フッサ－ル『幾何学の起源』</li>
+    <li data-isbn="9784588000812">エルンスト・マッハ『時間と空間』</li>
+    <li data-isbn="9784041147924">春海水亭『致死率十割怪談』</li>
+    <li data-isbn="9784623088164">落合仁司『構造主義の数理：ソシュール、ラカン、ドゥルーズ』</li>
+    <li data-isbn="9784101802879">柞刈湯葉『幽霊を信じない理系大学生、霊媒師のバイトをする』</li>
+    <li data-isbn="9784588150685">鈴木俊洋『数学の現象学：数学的直観を扱うために生まれたフッサール現象学』</li>
+    <li data-isbn="9784065171240">佐藤究『Ank : a mirroring ape』</li>
+    <li data-isbn="Null">浅木原忍『Dr.レイテンシーの なぜなに？相対性精神学』</li>
+    <li data-isbn="9784061590731">L・ベンジャミン・ウォーフ『言語・思考・現実』</li>
+    <li data-isbn="9784150313272">早瀬耕『グリフォンズ・ガーデン』</li>
+    <li data-isbn="9784150506094">トム・スタンデージ『ヴィクトリア朝時代のインターネット』</li>
+    <li data-isbn="9784150315740">日本SF作家クラブ編『地球へのSF』</li>
+    <li data-isbn="9784480511201">鈴木健『なめらかな社会とその敵：PICSY・分人民主主義・構成的社会契約論』</li>
+    <li data-isbn="9784150113377">グレッグ・イーガン『祈りの海』</li>
+    <li data-isbn="9784622039556">ジョン・D・バロー『万物理論 究極の説明を求めて』</li>
+    <li data-isbn="9784488711016">グレッグ・イーガン『宇宙消失』</li>
+    <li data-isbn="9784791765874">ルース・タトロー『バッハの暗号』</li>
+    <li data-isbn="9784003420973">マックス・ウェーバー『職業としての政治』</li>
+    <li data-isbn="9784150122232">グレッグ・イーガン『ビット・プレイヤー』</li>
+    <li data-isbn="9784863855458">川野芽生『月面文字翻刻一例』</li>
+    <li data-isbn="9784309464176">ミシェル・ウェルベック『ある島の可能性』</li>
+    <li data-isbn="9784003115213">朝永振一郎『量子力学と私』</li>
+    <li data-isbn="9784488711023">グレッグ・イーガン『万物理論』</li>
+    <li data-isbn="9784041141434">加藤文元『数学の世界史』</li>
+    <li data-isbn="9784101030050">志賀直哉『城の崎にて・小僧の神様』</li>
+    <li data-isbn="9784314010047">アルフレッド・W・クロスビー『飛び道具の人類史：火を投げるサルが宇宙を飛ぶまで』</li>
+    <li data-isbn="9784041146187">佐藤究『テスカトリポカ』</li>
+    <li data-isbn="9784103553113">小川哲『君が手にするはずだった黄金について』</li>
+    <li data-isbn="9784153350304">チャイナ・ミエヴィル『爆発の三つの欠片』</li>
+    <li data-isbn="9784003390290">アンリ・ポアンカレ『科学と仮説』</li>
+    <li data-isbn="9784150112905">グレッグ・イーガン『順列都市 下』</li>
+    <li data-isbn="9784150112899">グレッグ・イーガン『順列都市 上』</li>
+    <li data-isbn="9784480094810">彌永昌吉・赤攝也『公理と証明』</li>
+    <li data-isbn="9784150117627">チャイナ・ミエヴィル『ジェイクをさがして』</li>
+    <li data-isbn="9784153400146">木澤佐登志『闇の精神史』</li>
+    <li data-isbn="9784627157712">白井仁人『量子力学の諸解釈』</li>
+    <li data-isbn="9784802093194">フィッシュ『巨大数論』</li>
+    <li data-isbn="9784480089816">野矢茂樹『ウィトゲンシュタイン『論理哲学論考』を読む』</li>
+    <li data-isbn="9784480093585">甘利俊一『情報理論』</li>
+    <li data-isbn="9784061494664">高橋昌一郎『ゲーデルの哲学』</li>
+    <li data-isbn="9784334100513">斜線堂有紀『本の背骨が最後に残る』</li>
+    <li data-isbn="9784766421033">イアン・ハッキング『確率の出現』</li>
+    <li data-isbn="9784152103055">ウィリアム・ブルワー『レッド・アロー』</li>
+    <li data-isbn="9784826900454">ニック・ハーバード『量子と実在』</li>
+    <li data-isbn="9784563020422">B・デスパーニア『現代物理学にとって実在とは何か』</li>
+    <li data-isbn="9784150120146">グレッグ・イーガン『ゼンデギ』</li>
+    <li data-isbn="9784003368916">ウィトゲンシュタイン『論理哲学論考』</li>
+    <li data-isbn="9784003208090">知里幸惠『アイヌ神謡集』</li>
+    <li data-isbn="9784150118358">チャイナ・ミエヴィル『都市と都市』</li>
+    <li data-isbn="9784778319052">梨『自由慄』</li>
+    <li data-isbn="9784480093066">ルネ・デカルト『方法序説』</li>
+    <li data-isbn="Null">梨花『ねえ初恋に選んであげる』</li>
+    <li data-isbn="9784480095756">野家啓一『科学哲学への招待』</li>
+    <li data-isbn="9784000268967">サミール・オカーシャ『科学哲学』</li>
+    <li data-isbn="9784150121303">グレッグ・イーガン『白熱光』</li>
+    <li data-isbn="9784336035936">スタニスワフ・レム『虚数』</li>
+    <li data-isbn="9784061494206">野矢茂樹『無限論の教室』</li>
+    <li data-isbn="9784336024701">スタニスワフ・レム『完全な真空』</li>
+    <li data-isbn="9784150118266">グレッグ・イーガン『プランク・ダイヴ』</li>
+    <li data-isbn="9784150115944">グレッグ・イーガン『ひとりっ子』</li>
+    </ol>
+</div>
+</center>
+<button class="button" onclick="download()">読書記録をダウンロード(CSV)</button>
+
+
+<script>
+  var bookDataList = []; // グローバル変数を追加
+  var isbnCache = {};    // ISBNのキャッシュ
+
+  async function addLinksToList() {
+    var ol = document.getElementById('myList');
+    var items = Array.from(ol.getElementsByTagName('li'));
+
+    async function processLink(li) {
+      var text = li.textContent;
+      var isbn = li.getAttribute('data-isbn');
+      var match = text.match(/^(.*?)『(.*?)』$/);
+
+      if (!match || !isbn || isbn.toLowerCase() === "isbn" || isbn.toLowerCase() === "null") {
+        return { title: text, author: '', isbn: '', description: '' };
+      }
+
+      var author = match[1].trim();
+      var title = match[2].trim();
+
+      if (isbnCache[isbn]) {
+        // キャッシュにヒットした場合はキャッシュを利用
+        return isbnCache[isbn];
+      }
+
+      const bookData = await getBookLink(isbn);
+      var description = bookData.description || 'No description available';
+
+      if (bookData.link) {
+        li.innerHTML = author + '『<a href="' + bookData.link + '" target="_blank">' + title + '</a>』';
+      }
+
+      var result = { title, author, isbn, description };
+      bookDataList.push(result);  // グローバル変数に追加
+      isbnCache[isbn] = result;   // キャッシュに追加
+
+      return result;
+    }
+    const results = await Promise.all(items.map(li => processLink(li)));
+
+    // ダイアログを表示
+    alert('リンク処理が完了しました。CSVをダウンロードできます。');
+
+    return results;
+  }
+
+  async function getBookLink(isbn) {
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
+    const data = await response.json();
+
+    if (data.totalItems > 0) {
+      const googleBooksId = data.items[0].id;
+      const description = data.items[0].volumeInfo.description || '';
+      return {
+        link: `https://www.google.com/books/edition/_/${googleBooksId}`,
+        description: description
+      };
+    }
+    return { link: null, description: '' };
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    await addLinksToList();
+  });
+</script>
+
+<script>
+  function download() {
+      const listItems = document.querySelectorAll('#myList > li');
+      const csvRows = [];
+
+      // CSVのヘッダーを追加 (説明の列を追加)
+      csvRows.push(['著者', 'タイトル', 'ISBN', '説明'].join(','));
+
+      listItems.forEach(item => {
+          const text = item.textContent;
+          const isbn = item.getAttribute('data-isbn');
+
+          // 正規表現で著者とタイトルを抽出
+          const match = text.match(/^(.+?)『(.+)』$/);
+          if (match) {
+              const author = match[1].trim();
+              const title = match[2].trim();
+              
+              // グローバル変数から説明を取得
+              const bookData = bookDataList.find(data => data.isbn === isbn) || { description: '' };
+              let description = bookData.description;
+
+              if (!isbn || isbn.toLowerCase() === "null") {
+                  description = 'Null';
+              } else if (description === 'No description available') {
+                  description = 'Null';
+              }
+              
+              const escapeCsvField = (field) => {
+                  if (field.includes('"')) {
+                      field = field.replace(/"/g, '""');
+                  }
+                  if (field.includes(',') || field.includes('"') || field.includes('\n')) {
+                      field = `"${field}"`;
+                  }
+                  return field;
+              };
+
+              csvRows.push([
+                  escapeCsvField(author), 
+                  escapeCsvField(title), 
+                  escapeCsvField(isbn), 
+                  escapeCsvField(description)
+              ].join(','));
+          }
+      });
+
+      // CSVファイルの内容を作成
+      const csvString = csvRows.join('\n');
+
+      const bom = '\ufeff';
+      const csvWithBom = bom + csvString;
+      const blob = new Blob([csvWithBom], { type: 'text/csv; charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+
+      // 現在の日付を取得し、ファイル名を生成
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const dateString = `${yyyy}${mm}${dd}`;
+      const filename = `book_records_${dateString}.csv`;
+
+      // ダウンロード用のリンクを作成し、自動的にクリックする
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+  }
+</script>
+
+</body>
+</html>
