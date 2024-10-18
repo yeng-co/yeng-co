@@ -1,226 +1,119 @@
-
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>墓場</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
-        
-        body {
-            background-color: white;
-            font-size: 100%;
-            font-family: 'M PLUS 1p', sans-serif;
-        }
-    
-        .header {
-            background-color: white;
-            font-size: 30px;
-            color: #000;
-            text-align: left;
-        }
-    
-        .nav-menu {
-            overflow: hidden;
-            background-color: black;
-        }
-    
-        .nav-menu a {
-            font-size: 15px;
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-    
-        .nav-menu a:hover {
-            background-color: white;
-            color: black;
-            text-decoration: none;
-        }
-    
-        .nav-menu b {
-            font-size: 15px;
-            float: left;
-            display: block;
-            color: black;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            background-color: white;
-        }
-    
-        .nav-menu .note {
-            font-size: 15px;
-            float: left;
-            display: block; 
-            color: #43cbb5;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            background-color: black;
-        }
-    
-        .nav-menu .note:hover {
-            background-color: white;
-            color: #43cbb5;
-            text-decoration: underline;
-        }
-    
-        .nav-menu .git {
-            font-size: 15px;
-            float: left;
-            display: block; 
-            color: #f34e29;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            background-color: black;
-        }
-    
-        .nav-menu .git:hover {
-            background-color: white;
-            color: #f34e29;
-            text-decoration: underline;
-        }
-    
-        li {
-            font-size: 22px;
-            color: black;
-        }
-        .hide {
-            text-decoration: none;
-            color: black;
-            cursor: text;
-        }
-    
-        hr {
-            margin-top: 6px;
-            margin-bottom: 6px;
-        }
-    
-        h1 {
-            font-family: "Hina Mincho", serif;
-        }
-    
-        h2 {
-            font-family: "Hina Mincho", serif;
-            font-size: 30px;
-            color: black;
-            text-align: center;
-        }
-    
-        h3 {
-            font-size: 24px;
-            color: black;
-            border: 4px solid black;
-            border-radius: 20px;
-            padding: 5px;
-            margin: 5px;
-            text-align: center;
-            font-weight: normal;
-            width: 60%;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-        }
-    
-        ul {
-            width: 65%;
-            margin-left: auto;
-            margin-right: -10% auto;
-            padding: 0;
-        }
-        ul li {
-            font-size: 20px;
-            text-align: left;
-            padding-left: 0;
-        }
-        .waku {
-            border: 4px solid black; 
-            border-radius: 20px;
-            padding: 10px; 
-            margin: 20px auto; 
-            color: #000;
-            width: 60%; 
-            background-color: #DDDDDD; 
-        }
-    </style>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>墓場</title>
+<link rel="icon" type="image/png" href="icon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
+body {
+background-color: white;
+font-size: 120%;
+font-family: 'M PLUS 1p', sans-serif;
+}
+.header {
+background-color: white;
+font-size: 30px;
+color: #000;
+text-align: left;
+}
+.nav-menu {
+overflow: hidden;
+background-color: black;
+}
+.nav-menu a {
+font-size: 15px;
+float: left;
+display: block;
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+.nav-menu a:hover {
+background-color: white;
+color: black;
+text-decoration: none;
+}
+.nav-menu .note {
+font-size: 15px;
+float: left;
+color: #43cbb5;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+background-color: black;
+}
+.nav-menu .note:hover {
+background-color: white;
+color: #43cbb5;
+text-decoration: underline;
+}
+.nav-menu .git {
+font-size: 15px;
+float: left;
+color: #f34e29;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+background-color: black;
+}
+.nav-menu .git:hover {
+background-color: white;
+color: #f34e29;
+text-decoration: underline;
+}
+li {
+font-size: 105%;
+color: black;
+}
+hr {
+margin-top: 6px;
+margin-bottom: 6px;
+}
+h1 {
+font-family: "Hina Mincho", serif;
+}
+h2 {
+font-size: 30px;
+color: black;
+}
+h3 {
+font-size: 22px; 
+color: black;
+border: 4px solid black; 
+border-radius: 20px; 
+padding: 5px;
+margin: 10px 0;
+text-align: center;
+font-weight: normal;
+}
+img {
+            max-width: 40% auto; 
+            max-width: 40%; 
+height: auto; 
+display: block; 
+margin: 8vh auto; 
+}
+</style>
 </head>
 <body>
 <div class="header">
-    <h1>墓場</h1>
-    <hr size="10px" color="black">
+<h1>墓場</h1>
+<hr size="10px" color="black">
 </div>
 <div class="nav-menu">
-    <a href="index.html">ホーム</a>
-    <b href="profile.html">プロフィール</b>
-    <a href="note.html">つぶやき</a>
-    <a href="banner.html">バナー</a>
-    <a class="note" href="https://note.com/uyuni_arc/" target="_blank" rel="noopener noreferrer">note</a>
-    <a class="git" href="https://github.com/Yeng-Co" target="_blank" rel="noopener noreferrer">GitHub</a>
+<a href="index.html">ホーム</a>
+<a href="profile.html">プロフィール</a>
+<a href="note.html">つぶやき</a>
+<a href="banner.html">バナー</a>
+<a class="note" href="https://note.com/uyuni_arc/" target="_blank" rel="noopener noreferrer">note</a>
+<a class="git" href="https://github.com/Yeng-Co" target="_blank" rel="noopener noreferrer">GitHub</a>
 </div>
 <hr size="10px" color="black">
-<h2>プロフィール</h2>
-<div class="waku">
-<h3>名前</h3>
-<ul>
-    <li>えんこ</li>
-    <li>Yeng-Co</li>
-    <li>縁故</li>
-    <li>円弧</li>
-    <li>塩湖</li>
-    <li><a href="https://x.com/noit_an_apert" class="hide" target="_blank" rel="noopener noreferrer">猿猴</a></li> <!-- Fixed closing tag -->
-</ul>
-
-<h3>属性</h3>
-<ul>
-    <li>学生</li>
-    <li>哲学科</li>
-    <li>オタク</li>
-    <li>成人</li>
-    <li>男性</li>
-</ul>
-
-<h3>趣向</h3>
-<ul>
-    <li>読書</li>
-    <li>ガジェット集める</li>
-    <li>インターネット</li>
-</ul>
-<h3>文章</h3>
-<ul>
-    <li><a href="https://note.com/uyuni_arc/" target="_blank" rel="noopener noreferrer">えんこ - note</a></li> <!-- Fixed closing tag -->
-</ul>
-<h3>作ったもの</h3>
-<center>
-    <iframe class="note-embed" src="https://note.com/embed/notes/n482c0b0875b5" style="border: 0; display: block; max-width: 99%; width: 494px; padding: 0px; margin: 10px 0px; position: static; visibility: visible;" height="400"></iframe>
-    <script async src="https://note.com/scripts/embed.js" charset="utf-8"></script>    
-</center>
-<h3>好きな小説家</h3>
-<ul>
-    <li>柞刈湯葉</li>
-    <li>円城塔</li>
-    <li>小川哲</li>
-    <li>神林長平</li>
-    <li>柴田勝家</li>
-    <li>竹田人造</li>
-    <li>梨</li>
-    <li>藤井太洋</li>
-    <li>吉上亮</li>
-    <li>アーサー・C・クラーク</li>
-    <li>アンディ・ウィアー</li>
-    <li>グレッグ・イーガン</li>
-    <li>ジョージ・オーウェル</li>
-    <li>チャイナ・ミエヴィル</li>
-    <li>テッド・チャン</li>
-</ul>
-</div>
+<center><img src="icon.png" alt="icon"></center>
 </body>
 </html>
