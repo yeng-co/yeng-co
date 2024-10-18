@@ -156,8 +156,8 @@
   <a href="profile.html">プロフィール</a>
   <b href="note.html">つぶやき</b>
   <a href="banner.html">バナー</a>
-  <a class="note" href="https://note.com/uyuni_arc/">note</a>
-  <a class="git" href="https://github.com/Yeng-Co">GitHub</a>
+  <a class="note" href="https://note.com/uyuni_arc/" target="_blank" rel="noopener noreferrer">note</a>
+  <a class="git" href="https://github.com/Yeng-Co" target="_blank" rel="noopener noreferrer">GitHub</a>
 </div>
 <hr size="10px" color="black">
 <h2>つぶやき</h2>
@@ -165,10 +165,10 @@
 <ul>
     <li>Twitterが死んだらここに書く</li>
     <li>読書記録をCSVでダウンロードできるようにしました．</li>
-    <li>ISBNの存在する書籍の詳細としてGoogleブックスのページをリンクしました．（APIを使っているので結構時間かかります．要修正）</li>
+    <li>ISBNの存在する書籍の詳細として<a href="https://books.google.co.jp" target="_blank" rel="noopener noreferrer">Googleブックス</a>のページをリンクしました．</li>
     <li>GoogleBooksAPIから取得できた説明をCSVに追加しました．</li>
-    <li>CSVの要素にAPIから取得したものが含まれているので，リンク処理が終わるまでダウンロードできないかもしれません．処理完了のダイアログ後にお願いします．</li>
-    <li>書誌情報を取得するか選べるようにしました．</li>
+    <li>CSVの要素にAPIから取得したものが含まれているので，リンク処理前にダウンロードボタンをクリックすると，説明がNullになります．処理完了のダイアログ後にお願いします．</li>
+    <li>書誌情報を取得するか選べるようにしました．取得せずにCSVをダウンロードした場合も説明はNullになります．</li>
 </ul>
 <h3>読書記録(2024/01/01~)</h3>
 <button class="button" id="fetchBooksButton">書誌情報を取得(Google Books API)</button>
