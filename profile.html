@@ -90,6 +90,7 @@
             color: #f34e29;
             text-decoration: underline;
         }
+        
         .nav-menu .music {
             font-size: 15px;
             float: left;
@@ -99,15 +100,18 @@
             text-decoration: none;
             background-color: black;
         }
+        
         .nav-menu .music:hover {
             background-color: white;
             color: #fa2d48;
             text-decoration: underline;
         }
+    
         li {
             font-size: 22px;
             color: black;
         }
+    
         .hide {
             text-decoration: none;
             color: black;
@@ -151,11 +155,13 @@
             margin-right: -10% auto;
             padding: 0;
         }
+    
         ul li {
-            font-size: 20px;
+            font-size: 22px;
             text-align: left;
             padding-left: 0;
         }
+    
         .waku {
             border: 4px solid black; 
             border-radius: 20px;
@@ -165,7 +171,23 @@
             width: 60%; 
             background-color: #DDDDDD; 
         }
-    </style>
+    
+        @media (max-width: 768px) {
+            h3{
+                font-size: 20px;
+            }
+            ul{
+                width: 70%;
+            }
+            ul li{
+                font-size: 18px;
+            }
+            .waku {
+                width: 80%;
+                margin: 10px auto;
+            }
+        }
+</style>
 </head>
 <body>
 <div class="header">
