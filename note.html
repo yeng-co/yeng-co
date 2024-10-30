@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="jrboxfutp idc0_350"><head><meta http-equiv="Content-Type"="text/html;charset=UTF-8">
     
@@ -125,11 +126,18 @@
             background-color: white;
         }
         .scrollable-list {
-            width: 95%;
-            height: 300px;
+            width: 80%;
+            height: 500px;
             overflow-y: scroll;
             background-color: #dddddd;
             padding: 15px;
+            border: 4px solid black; 
+            border-radius: 20px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        crollable-list::-webkit-scrollbar {
+            display: none;
         }
         ol {
             padding-left: 20px;
@@ -168,27 +176,18 @@
 <div class="nav-menu">
   <a href="index.html">ホーム</a>
   <a href="profile.html">プロフィール</a>
-  <b href="note.html">つぶやき</b>
+  <b href="note.html">読書記録</b>
   <a href="banner.html">バナー</a>
   <a class="music" href="https://music.apple.com/jp/playlist/%E8%89%AF%E3%81%84%E9%9F%B3%E6%A5%BD/pl.u-b3b8RMeSKrk07Pk" target="_blank" rel="noopener noreferrer">プレイリスト</a>
   <a class="note" href="https://note.com/uyuni_arc/" target="_blank" rel="noopener noreferrer">note</a>
   <a class="git" href="https://github.com/Yeng-Co" target="_blank" rel="noopener noreferrer">GitHub</a>
 </div>
 <hr size="10px" color="black">
-<h2>つぶやき</h2>
-<h3>SNS代理</h3>
-<ul>
-    <li>Twitterが死んだらここに書く</li>
-    <li>読書記録をCSVでダウンロードできるようにしました．</li>
-    <li>ISBNの存在する書籍の詳細として<a href="https://books.google.co.jp" target="_blank" rel="noopener noreferrer">Googleブックス</a>のページをリンクしました．</li>
-    <li>GoogleBooksAPIから取得できた説明をCSVに追加しました．</li>
-    <li>CSVの要素にAPIから取得したものが含まれているので，リンク処理前にダウンロードボタンをクリックすると，説明がNullになります．処理完了のダイアログ後にお願いします．</li>
-    <li>書誌情報を取得するか選べるようにしました．取得せずにCSVをダウンロードした場合も説明はNullになります．</li>
-</ul>
+<h2>読書記録</h2>
+
 <h3>読書記録(2024/01/01~)</h3>
-<button class="button" id="fetchBooksButton">書誌情報を取得(Google Books API)</button>
 <center><div class="scrollable-list">
-    <ol id="myList" class="hidden">
+    <ol id="myList" class="hidden" reversed="reversed">
     <li data-isbn="9784309032184">小川哲『スメラミシング』</li>
     <li data-isbn="9784004120995">ピーター・トラッドギル『言語と社会』</li>
     <li data-isbn="9784041126066">ラフカディオ・ハーン『怪談』</li>
@@ -283,80 +282,14 @@
 </center>
 <button class="button" onclick="download()">読書記録をダウンロード(CSV)</button>
 
-<script>
-  var bookDataList = [];
-  var isbnCache = {};
-
-  async function addLinksToList() {
-    var ol = document.getElementById('myList');
-    var items = Array.from(ol.getElementsByTagName('li'));
-
-    async function processLink(li) {
-      var text = li.textContent;
-      var isbn = li.getAttribute('data-isbn');
-      var match = text.match(/^(.*?)『(.*?)』$/);
-
-      if (!match || !isbn || isbn.toLowerCase() === "isbn" || isbn.toLowerCase() === "null") {
-        return { title: text, author: '', isbn: '', description: '' };
-      }
-
-      var author = match[1].trim();
-      var title = match[2].trim();
-
-      if (isbnCache[isbn]) {
-        return isbnCache[isbn];
-      }
-
-      const bookData = await getBookLink(isbn);
-      var description = bookData.description || 'No description available';
-
-      if (bookData.link) {
-        li.innerHTML = author + '『<a href="' + bookData.link + '" target="_blank">' + title + '</a>』';
-      }
-
-      var result = { title, author, isbn, description };
-      bookDataList.push(result);
-      isbnCache[isbn] = result;
-
-      return result;
-    }
-    const results = await Promise.all(items.map(li => processLink(li)));
-
-    alert('リンク処理が完了しました。CSVをダウンロードできます。');
-
-    return results;
-  }
-
-  async function getBookLink(isbn) {
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
-    const data = await response.json();
-
-    if (data.totalItems > 0) {
-      const googleBooksId = data.items[0].id;
-      const description = data.items[0].volumeInfo.description || '';
-      return {
-        link: `https://www.google.com/books/edition/_/${googleBooksId}`,
-        description: description
-      };
-    }
-    return { link: null, description: '' };
-  }
-
-  document.getElementById('fetchBooksButton').addEventListener('click', async function() {
-    // ユーザーに確認を求める
-    const userConfirmed = confirm('書誌情報を取得しますか？');
-    if (userConfirmed) {
-      await addLinksToList();
-    }
-  });
-</script>
+<button class="button" onclick="download()">読書記録をダウンロード(CSV)</button>
 
 <script>
   function download() {
       const listItems = document.querySelectorAll('#myList > li');
       const csvRows = [];
 
-      csvRows.push(['著者', 'タイトル', 'ISBN', '説明'].join(','));
+      csvRows.push(['著者', 'タイトル', 'ISBN'].join(','));
 
       listItems.forEach(item => {
           const text = item.textContent;
@@ -366,16 +299,7 @@
           if (match) {
               const author = match[1].trim();
               const title = match[2].trim();
-              
-              const bookData = bookDataList.find(data => data.isbn === isbn) || { description: '' };
-              let description = bookData.description;
 
-              if (!isbn || isbn.toLowerCase() === "null") {
-                  description = 'Null';
-              } else if (description === 'No description available') {
-                  description = 'Null';
-              }
-              
               const escapeCsvField = (field) => {
                   if (field.includes('"')) {
                       field = field.replace(/"/g, '""');
@@ -389,8 +313,7 @@
               csvRows.push([
                   escapeCsvField(author), 
                   escapeCsvField(title), 
-                  escapeCsvField(isbn), 
-                  escapeCsvField(description)
+                  escapeCsvField(isbn)
               ].join(','));
           }
       });
