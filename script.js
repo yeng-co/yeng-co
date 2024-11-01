@@ -75,7 +75,7 @@ function updateClock() {
     const milliseconds = now.getMilliseconds();
 
     const totalSecondsInDay = (hours * 3600 + minutes * 60 + seconds + milliseconds / 1000);
-    const totalSecondsIn36Hours = totalSecondsInDay * (82944 / 86400);
+    const totalSecondsIn36Hours = totalSecondsInDay * (25 / 24);
     const newMinutes = totalSecondsIn36Hours / 48;
     const minuteAngle = (newMinutes % 48) * (360 / 48);
     const hourAngle = (newMinutes * 360) / 1728;
