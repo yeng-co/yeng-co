@@ -2,87 +2,15 @@ function toBase12(num) {
     if (num === 0) return "0";
     const digits = "0123456789AB";
     let result = "";
-    let isNegative = num < 0;
-    num = Math.abs(num);
-    
-    // 整数部分の処理
-    let intPart = Math.floor(num);
-    if (intPart === 0) result = "0";
-    while (intPart > 0) {
-        result = digits[intPart % 12] + result;
-        intPart = Math.floor(intPart / 12);
+    while (num > 0) {
+        result = digits[num % 12] + result;
+        num = Math.floor(num / 12);
     }
-    
-    // 小数部分の処理
-    let fracPart = num - Math.floor(num);
-    if (fracPart > 0) {
-        result += ".";
-        for (let i = 0; i < 3; i++) { // 小数点以下3桁まで
-            fracPart *= 12;
-            result += digits[Math.floor(fracPart)];
-            fracPart -= Math.floor(fracPart);
-        }
-    }
-    
-    return isNegative ? "-" + result : result;
+    return result;
 }
 
 function createClock() {
-    // カウンター表示部分を追加
-    const counterDiv = document.createElement('div');
-    counterDiv.className = 'counter-display';
-    counterDiv.style.textAlign = 'center';
-    counterDiv.style.marginTop = '16px';
-    counterDiv.style.fontSize = '18px';
-    counterDiv.innerHTML = `
-        <div class="counter-row">
-            <div class="counter-label">標準時間(10進)：</div>
-            <div class="counter-value"><span id="standard-decimal">0</span> 秒</div>
-        </div>
-        <div class="counter-row">
-            <div class="counter-label">標準時間(12進)：</div>
-            <div class="counter-value"><span id="standard-base12">0</span> 秒</div>
-        </div>
-        <div class="counter-row">
-            <div class="counter-label">新時間(10進)：</div>
-            <div class="counter-value"><span id="new-decimal">0</span> 新秒</div>
-        </div>
-        <div class="counter-row">
-            <div class="counter-label">新時間(12進)：</div>
-            <div class="counter-value"><span id="new-base12">0</span> 新秒</div>
-        </div>
-    `;
-
-    // スタイルを追加
-    const style = document.createElement('style');
-    style.textContent = `
-        .counter-display {
-            font-family: monospace;
-            border: 2px solid black;
-            padding: 10px;
-            margin: 16px auto;
-            width: fit-content;
-            min-width: 300px;
-            background: white;
-        }
-        .counter-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-            padding: 2px 10px;
-        }
-        .counter-label {
-            margin-right: 15px;
-        }
-        .counter-value {
-            min-width: 150px;
-            text-align: left;
-        }
-    `;
-    document.head.appendChild(style);
-
     const clock = document.getElementById('clock');
-    document.querySelector('.container').insertBefore(counterDiv, document.getElementById('newminutes-display'));
     
     for (let i = 0; i < 36; i++) {
         const angle = (i * 360) / 36;
@@ -141,25 +69,30 @@ function createClock() {
 
 function updateClock() {
     const now = new Date();
-    const startOfDay = new Date(now);
-    startOfDay.setHours(0, 0, 0, 0);
-    const msSinceStartOfDay = now - startOfDay;
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const milliseconds = now.getMilliseconds();
+
+    // Convert standard time to new time system
+    // 1 standard day = 86400 seconds = 36 new hours
+    // 1 new hour = 48 new minutes
+    // 1 new minute = 48 new seconds
+    // 1 new second = 25/24 standard seconds
     
-    // 標準時間（秒）
-    const totalStandardSeconds = msSinceStartOfDay / 1000;
+    // First convert everything to standard seconds
+    const totalStandardSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
     
-    // 新時間（新秒）
+    // Convert to new seconds (multiply by 24/25 to adjust for new second length)
     const totalNewSeconds = totalStandardSeconds * (24/25);
     
-    // カウンター更新
-    document.getElementById('standard-decimal').textContent = totalStandardSeconds.toFixed(3);
-    document.getElementById('standard-base12').textContent = toBase12(totalStandardSeconds);
-    document.getElementById('new-decimal').textContent = totalNewSeconds.toFixed(3);
-    document.getElementById('new-base12').textContent = toBase12(totalNewSeconds);
-
+    // Calculate new minutes (48 new seconds per new minute)
     const totalNewMinutes = totalNewSeconds / 48;
+    
+    // Calculate new hours (48 new minutes per new hour)
     const totalNewHours = totalNewMinutes / 48;
 
+    // Calculate angles for hands
     const secondAngle = (totalNewSeconds % 48) * (360 / 48);
     const minuteAngle = (totalNewMinutes % 48) * (360 / 48);
     const hourAngle = (totalNewHours % 36) * (360 / 36);
@@ -171,14 +104,12 @@ function updateClock() {
     hands.secondHand.style.transform = 
         `translate(-50%, -100%) rotate(${secondAngle}deg)`;
     
+    // Update digital display
     const displayMinutes = Math.floor(totalNewMinutes);
     const displaySeconds = Math.floor(totalNewSeconds % 48);
     const display = document.getElementById('newminutes-display');
     display.textContent = `${toBase12(displayMinutes).padStart(4, '0')}:${toBase12(displaySeconds).padStart(2, '0')}`;
 
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
     const digitalClock = document.getElementById('digital-clock');
     digitalClock.textContent = 
         `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
