@@ -102,3 +102,46 @@
     font-weight: bold;
     color: green;
 }
+
+@media (max-width: 600px) {
+    .clock {
+        width: 200px;
+        height: 200px;
+        border-width: 2px;
+    }
+
+    .hour-line {
+        width: 3px;
+        height: 10px;
+    }
+
+    .second-line {
+        width: 1px;
+        height: 5px;
+    }
+
+    .hour-number {
+        top: 16px;
+        font-size: 9px;
+    }
+
+    .hour-hand {
+        width: 3px;
+        height: 64px;
+    }
+
+    .minute-hand {
+        width: 1.5px;
+        height: 85px;
+    }
+
+    .second-hand {
+        width: 0.67px;
+        height: 93px;
+    }
+
+    .center-dot {
+        width: 10.67px;
+        height: 10.67px;
+    }
+}
