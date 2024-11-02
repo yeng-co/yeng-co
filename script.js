@@ -73,26 +73,15 @@ function updateClock() {
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
     const milliseconds = now.getMilliseconds();
-
-    // Convert standard time to new time system
-    // 1 standard day = 86400 seconds = 36 new hours
-    // 1 new hour = 48 new minutes
-    // 1 new minute = 48 new seconds
-    // 1 new second = 25/24 standard seconds
-    
-    // First convert everything to standard seconds
+      
     const totalStandardSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
     
-    // Convert to new seconds (multiply by 24/25 to adjust for new second length)
-    const totalNewSeconds = totalStandardSeconds * (24/25);
+    const totalNewSeconds = totalStandardSeconds * (25/24);
     
-    // Calculate new minutes (48 new seconds per new minute)
     const totalNewMinutes = totalNewSeconds / 48;
     
-    // Calculate new hours (48 new minutes per new hour)
     const totalNewHours = totalNewMinutes / 48;
 
-    // Calculate angles for hands
     const secondAngle = (totalNewSeconds % 48) * (360 / 48);
     const minuteAngle = (totalNewMinutes % 48) * (360 / 48);
     const hourAngle = (totalNewHours % 36) * (360 / 36);
@@ -104,7 +93,6 @@ function updateClock() {
     hands.secondHand.style.transform = 
         `translate(-50%, -100%) rotate(${secondAngle}deg)`;
     
-    // Update digital display
     const displayMinutes = Math.floor(totalNewMinutes);
     const displaySeconds = Math.floor(totalNewSeconds % 48);
     const display = document.getElementById('newminutes-display');
