@@ -76,7 +76,7 @@ function updateClock() {
       
     const totalStandardSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
     
-    const totalNewSeconds = totalStandardSeconds * (25/24);
+    const totalNewSeconds = totalStandardSeconds * (24/25);
     
     const totalNewMinutes = totalNewSeconds / 48;
     
