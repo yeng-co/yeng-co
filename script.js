@@ -76,7 +76,7 @@ function updateClock() {
       
     const totalStandardSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
     
-    const totalNewSeconds = totalStandardSeconds * (24/25);
+    const totalNewSeconds = totalStandardSeconds * (24 / 25);
     
     const totalNewMinutes = totalNewSeconds / 48;
     
@@ -99,11 +99,12 @@ function updateClock() {
     display.textContent = `${toBase12(displayMinutes).padStart(4, '0')}:${toBase12(displaySeconds).padStart(2, '0')}`;
 
     const digitalClock = document.getElementById('digital-clock');
-    digitalClock.textContent = 
-        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    digitalClock.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 const hands = createClock();
 
+
 setInterval(updateClock, 10);
 updateClock();
+
