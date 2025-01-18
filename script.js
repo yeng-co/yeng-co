@@ -1,6 +1,6 @@
 function toBase12(num) {
     if (num === 0) return "0";
-    const digits = "0123456789AB";
+    const digits = "0123456789↊↋";
     let result = "";
     while (num > 0) {
         result = digits[num % 12] + result;
