@@ -327,7 +327,13 @@
     const blob = new Blob([csvWithBom], { type: 'text/csv; charset=utf-8' });
     const url = URL.createObjectURL(blob);
 
-    const filename = `bookrecords_2024.csv`;
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const dateString = `${yyyy}${mm}${dd}`;
+    const filename = `bookrecords_${dateString}.csv`;
+    
     const a = document.createElement('a');
     a.href = url;
     a.download = filename;
