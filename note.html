@@ -222,9 +222,11 @@
   <button class="button" onclick="download()">現在の読書記録をダウンロード(CSV)</button>
 
 <script>
+  // 書籍1件ごとにGoogle Books APIから説明を取得する関数
   async function fetchDescription(item) {
     const isbn = item.getAttribute('data-isbn');
     if (!isbn) {
+      // ISBNがnullなら確認済みとする
       item.dataset.confirmed = "true";
       return;
     }
@@ -234,22 +236,26 @@
         const data = await response.json();
         if (data.totalItems > 0 && data.items && data.items.length > 0) {
           const volumeInfo = data.items[0].volumeInfo;
+          // 説明が存在すれば設定、なければ"null"を設定
           if (volumeInfo.description && volumeInfo.description.trim() !== "") {
             item.dataset.description = volumeInfo.description;
           } else {
             item.dataset.description = "null";
           }
-          item.dataset.confirmed = "true"; 
+          item.dataset.confirmed = "true"; // APIレスポンスが得られたので確認済み
         } else {
+          // 該当書籍が見つからなければ"null"とする
           item.dataset.description = "null";
           item.dataset.confirmed = "true";
         }
       }
     } catch (error) {
       console.error("書籍の説明取得エラー:", error);
+      // エラーの場合は確認済みとせず、再試行対象とする
     }
   }
 
+  // すべてのリスト項目について、説明取得を試み、未確定のものがあれば再帰的に再試行する関数
   async function fetchAllDescriptions() {
     const listItems = document.querySelectorAll('#myList > li');
     let needRetry = false;
@@ -269,6 +275,7 @@
             if (count < maxRetries) {
               needRetry = true;
             } else {
+              // 最大試行回数に達したら、たとえfetchできなくても確認済みとする
               item.dataset.confirmed = "true";
               if (!item.dataset.description) {
                 item.dataset.description = "null";
@@ -279,6 +286,7 @@
       }
     });
     await Promise.all(promises);
+    // 未確認の書籍があれば、2秒後に再試行
     if (needRetry) {
       return new Promise(resolve => {
          setTimeout(() => resolve(fetchAllDescriptions()), 2000);
@@ -286,9 +294,12 @@
     }
   }
 
+  // CSV生成・ダウンロード処理（全書籍の説明が確定した後に実施）
   async function download() {
+    // まず、非null ISBNの書籍について説明取得処理を完了させる
     await fetchAllDescriptions();
 
+    // すべての書籍についてCSVの行を作成
     const listItems = document.querySelectorAll('#myList > li');
     const csvRows = [];
     csvRows.push(['著者', 'タイトル', 'ISBN', '説明'].join(','));
@@ -300,8 +311,10 @@
       if (match) {
         const author = match[1].trim();
         const title = match[2].trim();
+        // ISBNがある場合はdata-descriptionの値、なければ"null"
         let description = isbn ? (item.dataset.description || "null") : "null";
 
+        // CSVフィールド内のカンマ・改行・ダブルクオートのエスケープ処理
         const escapeCsvField = (field) => {
           if (field.includes('"')) {
             field = field.replace(/"/g, '""');
@@ -332,7 +345,7 @@
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const dd = String(now.getDate()).padStart(2, '0');
     const dateString = `${yyyy}${mm}${dd}`;
-    const filename = `bookrecords_${dateString}.csv`;
+    const filename = `book_records_${dateString}.csv`;
     
     const a = document.createElement('a');
     a.href = url;
@@ -340,8 +353,10 @@
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    // アラートは表示せず、ダウンロードのみ実施
   }
 
+  // DOM読み込み時の既存処理：r/dの平均値を計算して表示
   document.addEventListener('DOMContentLoaded', function() {
     const listItems = document.querySelectorAll('#myList > li');
     const count = listItems.length;
@@ -354,6 +369,7 @@
     resultDiv.innerText = 'r/d: ' + average.toFixed(4);
   });
 </script>
+
 
 </body>
 </html>
