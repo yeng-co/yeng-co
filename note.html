@@ -353,21 +353,18 @@
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    // アラートは表示せず、ダウンロードのみ実施
   }
-
-  // DOM読み込み時の既存処理：r/dの平均値を計算して表示
-  document.addEventListener('DOMContentLoaded', function() {
-    const listItems = document.querySelectorAll('#myList > li');
-    const count = listItems.length;
-    const start = new Date('2024-01-01');
-    const end = new Date('2024-12-31');
-    const diffTime = Math.abs(end - start);
-    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
-    const average = count / days;
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerText = 'r/d: ' + average.toFixed(4);
-  });
+    document.addEventListener('DOMContentLoaded', function() {
+      const listItems = document.querySelectorAll('#myList > li');
+      const count = listItems.length;
+      const start = new Date('2025-01-01');
+      const today = new Date();
+      const diffTime = today - start;
+      const days = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+      const average = count / days;
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerText = 'r/d: ' + average.toFixed(4);
+    });
 </script>
 
 
