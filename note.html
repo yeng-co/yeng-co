@@ -192,6 +192,7 @@
   <center>
     <div class="scrollable-list">
       <ol id="myList" class="hidden" reversed="reversed">
+        <li data-isbn="9784150119102">チャイナ・ミエヴィル『クラーケン 上』</li>
         <li data-isbn="9784781617411">木澤佐登志『ダークウェブ・アンダーグラウンド：社会秩序を逸脱するネット暗部の住人たち』</li>
         <li data-isbn="9784309209203">ジャミル・ジャン・コチャイ『きみはメタルギアソリッドV：ファントムペインをプレイする』</li>
         <li data-isbn="9784480083470">ロラン・バルト『エッフェル塔』</li>
@@ -393,7 +394,7 @@
           setTimeout(() => resolve(fetchAllBookData()), 2000);
         });
       } else {
-        alert("すべての書籍の情報取得が完了しました");
+        alert("書籍の情報取得が完了しました。CSVがダウンロードできます。");
         return;
       }
     }
@@ -401,7 +402,7 @@
     async function download() {
       const listItems = document.querySelectorAll('#myList > li');
       const csvRows = [];
-      csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版日', '説明/目次'].join(','));
+      csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版日', '説明/目次(不正確な可能性があります。)'].join(','));
     
       for (const item of listItems) {
         const text = item.textContent;
