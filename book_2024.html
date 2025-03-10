@@ -517,7 +517,7 @@
         }
       }
     
-      const csvString = csvRows.join('\n');
+      const csvString = csvRows.join('\r\n');
       const bom = '\ufeff';
       const csvWithBom = bom + csvString;
       const blob = new Blob([csvWithBom], { type: 'text/csv; charset=utf-8' });
