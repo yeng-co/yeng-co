@@ -1,4 +1,5 @@
-  <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html class="jrboxfutp idc0_350">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -175,7 +176,7 @@
   <div class="nav-menu">
     <a href="index.html">ホーム</a>
     <a href="profile.html">プロフィール</a>
-    <b href="note.html">読書記録</b>
+    <a href="note.html">読書記録</a>
     <a href="clock.html">時計</a>
     <a href="banner.html">バナー</a>
     <a class="music" href="https://music.apple.com/jp/playlist/%E8%89%AF%E3%81%84%E9%9F%B3%E6%A5%BD/pl.u-b3b8RMeSKrk07Pk" target="_blank" rel="noopener noreferrer">プレイリスト</a>
@@ -183,11 +184,9 @@
     <a class="git" href="https://github.com/Yeng-Co" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
   <hr size="10px" color="black">
-  <h2>読書記録</h2>
-  <center>
-    <a href="book_2024.html">読書記録_2024</a>
-  </center>
-  <h3>読書記録(2025/01/01~)</h3>
+  <h2>読書記録_2024</h2>
+
+  <h3>読書記録(2024/01/01~2024/12/31)</h3>
   <center>
     <div class="scrollable-list">
       <ol id="myList" class="hidden" reversed="reversed">
@@ -220,178 +219,225 @@
     </div>
     <div id="result" style="font-size: 20px; margin-top: 10px;"></div>
   </center>
-  <button class="button" onclick="download()">現在の読書記録をダウンロード(CSV)</button>
+  <button class="button" onclick="download()">読書記録をダウンロード(CSV)</button>
 
-  <script>
-    function convertPubdate(pubdate) {
-      const digits = pubdate.replace(/\D/g, '');
-      if (digits.length >= 6) {
-        return digits.substring(0, 4) + "-" + digits.substring(4, 6);
-      } else if (digits.length === 4) {
-        return digits + "-01";
-      } else {
-        return pubdate; 
-      }
+<script>
+  function convertPubdate(pubdate) {
+    const digits = pubdate.replace(/\D/g, '');
+    if (digits.length >= 6) {
+      return digits.substring(0, 4) + "-" + digits.substring(4, 6);
+    } else if (digits.length === 4) {
+      return digits + "-01";
+    } else {
+      return pubdate; 
     }
-    
-    async function fetchBookData(item) {
+  }
+  
+  async function fetchBookData(item) {
+    const isbn = item.getAttribute('data-isbn');
+    if (!isbn || isbn === "null") {
+      item.dataset.confirmed = "true";
+      return;
+    }
+    try {
+      let publisher = "null";
+      let pubdate = "null";
+      let description = "";
+      
+      const response = await fetch(`https://api.openbd.jp/v1/get?isbn=${isbn}`);
+      if (response.ok) {
+        const data = await response.json();
+        if (Array.isArray(data) && data.length > 0 && data[0] !== null) {
+          const summary = data[0].summary;
+          publisher = summary.publisher;
+          if (!publisher || publisher.trim() === "") {
+            publisher = summary.series;
+          }
+          publisher = (publisher && publisher.trim() !== "") ? publisher : "null";
+          
+          let openbdPubdate = summary.pubdate;
+          if (openbdPubdate && openbdPubdate.trim() !== "") {
+            pubdate = convertPubdate(openbdPubdate);
+          }
+          
+          if (summary.description && summary.description.trim() !== "") {
+            description = summary.description;
+          } else if (data[0].onix && data[0].onix.CollateralDetail && data[0].onix.CollateralDetail.TextContent) {
+            const texts = data[0].onix.CollateralDetail.TextContent;
+            if (Array.isArray(texts)) {
+              description = texts.map(textItem => textItem.Text).join(" ");
+            }
+          }
+        }
+      }
+      
+      if (!description || description.trim() === "") {
+        try {
+          let bookId = null;
+          const searchResponse = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
+          if (searchResponse.ok) {
+            const searchData = await searchResponse.json();
+            if (searchData.totalItems > 0 && searchData.items && searchData.items.length > 0) {
+              const matchingItem = searchData.items.find(book => {
+                if (book.volumeInfo && book.volumeInfo.industryIdentifiers) {
+                  return book.volumeInfo.industryIdentifiers.some(identifier => 
+                    identifier.identifier.replace(/-/g, '') === isbn.replace(/-/g, '')
+                  );
+                }
+                return false;
+              });
+              if (matchingItem) {
+                bookId = matchingItem.id;
+              }
+            }
+          }
+          if (!bookId) {
+            const match = item.textContent.match(/^(.+?)『(.+)』$/);
+            if (match) {
+              const title = match[2].trim();
+              const titleSearchResponse = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(title)}`);
+              if (titleSearchResponse.ok) {
+                const titleSearchData = await titleSearchResponse.json();
+                if (titleSearchData.totalItems > 0 && titleSearchData.items && titleSearchData.items.length > 0) {
+                  bookId = titleSearchData.items[0].id;
+                }
+              }
+            }
+          }
+          if (bookId) {
+            const detailResponse = await fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`);
+            if (detailResponse.ok) {
+              const detailData = await detailResponse.json();
+              const volumeInfo = detailData.volumeInfo;
+              if (volumeInfo.description && volumeInfo.description.trim() !== "") {
+                description = volumeInfo.description;
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Google Books APIのデータ取得エラー:", error);
+        }
+      }
+      
+      if (description) {
+        description = description.replace(/[\r\n]+/g, "/");
+      }
+      
+      item.dataset.publisher = publisher;
+      item.dataset.pubdate = pubdate;
+      item.dataset.description = (description && description.trim() !== "") ? description : "null";
+      item.dataset.confirmed = "true"; 
+    } catch (error) {
+      console.error("書籍のデータ取得エラー:", error);
+    }
+  }
+  
+  async function fetchAllBookData() {
+    const listItems = document.querySelectorAll('#myList > li');
+    let needRetry = false;
+    const maxRetries = 4;
+    const promises = Array.from(listItems).map(async (item) => {
       const isbn = item.getAttribute('data-isbn');
-      if (!isbn) {
-        item.dataset.confirmed = "true";
-        return;
-      }
-      try {
-        const response = await fetch(`https://api.openbd.jp/v1/get?isbn=${isbn}`);
-        if (response.ok) {
-          const data = await response.json();
-          if (Array.isArray(data) && data.length > 0 && data[0] !== null) {
-            const summary = data[0].summary;
-            let publisher = summary.publisher;
-            if (!publisher || publisher.trim() === "") {
-              publisher = summary.series;
-            }
-            item.dataset.publisher = (publisher && publisher.trim() !== "") ? publisher : "null";
-            
-            let pubdate = summary.pubdate;
-            if (pubdate && pubdate.trim() !== "") {
-              pubdate = convertPubdate(pubdate);
-              item.dataset.pubdate = pubdate;
-            } else {
-              item.dataset.pubdate = "null";
-            }
-            
-            let description = "";
-            if (summary.description && summary.description.trim() !== "") {
-              description = summary.description;
-            } else if (data[0].onix && data[0].onix.CollateralDetail && data[0].onix.CollateralDetail.TextContent) {
-              const texts = data[0].onix.CollateralDetail.TextContent;
-              if (Array.isArray(texts)) {
-                description = texts.map(textItem => textItem.Text).join(" ");
-              }
-            }
-            if (description) {
-              description = description.replace(/[\r\n]+/g, "/");
-            }
-            item.dataset.description = (description && description.trim() !== "") ? description : "null";
-    
-            item.dataset.confirmed = "true"; 
-          } else {
-            item.dataset.publisher = "null";
-            item.dataset.pubdate = "null";
-            item.dataset.description = "null";
-            item.dataset.confirmed = "true";
-          }
+      if (isbn) {
+        if (!item.dataset.retryCount) {
+          item.dataset.retryCount = "0";
         }
-      } catch (error) {
-        console.error("書籍のデータ取得エラー:", error);
-      }
-    }
-    
-    async function fetchAllBookData() {
-      const listItems = document.querySelectorAll('#myList > li');
-      let needRetry = false;
-      const maxRetries = 4;
-      const promises = Array.from(listItems).map(async (item) => {
-        const isbn = item.getAttribute('data-isbn');
-        if (isbn) {
-          if (!item.dataset.retryCount) {
-            item.dataset.retryCount = "0";
-          }
+        if (item.dataset.confirmed !== "true") {
+          await fetchBookData(item);
           if (item.dataset.confirmed !== "true") {
-            await fetchBookData(item);
-            if (item.dataset.confirmed !== "true") {
-              let count = parseInt(item.dataset.retryCount, 10);
-              count++;
-              item.dataset.retryCount = count.toString();
-              if (count < maxRetries) {
-                needRetry = true;
-              } else {
-                item.dataset.confirmed = "true";
-                if (!item.dataset.publisher) {
-                  item.dataset.publisher = "null";
-                }
-                if (!item.dataset.pubdate) {
-                  item.dataset.pubdate = "null";
-                }
-                if (!item.dataset.description) {
-                  item.dataset.description = "null";
-                }
+            let count = parseInt(item.dataset.retryCount, 10);
+            count++;
+            item.dataset.retryCount = count.toString();
+            if (count < maxRetries) {
+              needRetry = true;
+            } else {
+              item.dataset.confirmed = "true";
+              if (!item.dataset.publisher) {
+                item.dataset.publisher = "null";
+              }
+              if (!item.dataset.pubdate) {
+                item.dataset.pubdate = "null";
+              }
+              if (!item.dataset.description) {
+                item.dataset.description = "null";
               }
             }
           }
         }
+      }
+    });
+    await Promise.all(promises);
+    if (needRetry) {
+      return new Promise(resolve => {
+        setTimeout(() => resolve(fetchAllBookData()), 2000);
       });
-      await Promise.all(promises);
-      if (needRetry) {
-        return new Promise(resolve => {
-          setTimeout(() => resolve(fetchAllBookData()), 2000);
-        });
-      } else {
-        alert("すべての書籍の情報取得が完了しました");
-        return;
+    } else {
+      alert("すべての書籍の情報取得が完了しました");
+      return;
+    }
+  }
+  
+  async function download() {
+    const listItems = document.querySelectorAll('#myList > li');
+    const csvRows = [];
+    csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版日', '説明/目次'].join(','));
+  
+    for (const item of listItems) {
+      const text = item.textContent;
+      const isbn = item.getAttribute('data-isbn');
+      const match = text.match(/^(.+?)『(.+)』$/);
+      if (match) {
+        const author = match[1].trim();
+        const title = match[2].trim();
+        let publisher = isbn ? (item.dataset.publisher || "null") : "null";
+        let pubdate = isbn ? (item.dataset.pubdate || "null") : "null";
+        let description = isbn ? (item.dataset.description || "null") : "null";
+  
+        const escapeCsvField = (field) => {
+          if (field.includes('"')) {
+            field = field.replace(/"/g, '""');
+          }
+          if (field.includes(',') || field.includes('"') || field.includes('\n')) {
+            field = `"${field}"`;
+          }
+          return field;
+        };
+  
+        csvRows.push([
+          escapeCsvField(author),
+          escapeCsvField(title),
+          escapeCsvField(isbn || ""),
+          escapeCsvField(publisher),
+          escapeCsvField(pubdate),
+          escapeCsvField(description)
+        ].join(','));
       }
     }
-    
-    async function download() {
-      await fetchAllBookData();
-    
-      const listItems = document.querySelectorAll('#myList > li');
-      const csvRows = [];
-      csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版日', '説明/目次'].join(','));
-    
-      for (const item of listItems) {
-        const text = item.textContent;
-        const isbn = item.getAttribute('data-isbn');
-        const match = text.match(/^(.+?)『(.+)』$/);
-        if (match) {
-          const author = match[1].trim();
-          const title = match[2].trim();
-          let publisher = isbn ? (item.dataset.publisher || "null") : "null";
-          let pubdate = isbn ? (item.dataset.pubdate || "null") : "null";
-          let description = isbn ? (item.dataset.description || "null") : "null";
-    
-          const escapeCsvField = (field) => {
-            if (field.includes('"')) {
-              field = field.replace(/"/g, '""');
-            }
-            if (field.includes(',') || field.includes('"') || field.includes('\n')) {
-              field = `"${field}"`;
-            }
-            return field;
-          };
-    
-          csvRows.push([
-            escapeCsvField(author),
-            escapeCsvField(title),
-            escapeCsvField(isbn || ""),
-            escapeCsvField(publisher),
-            escapeCsvField(pubdate),
-            escapeCsvField(description)
-          ].join(','));
-        }
-      }
-    
-      const csvString = csvRows.join('\n');
-      const bom = '\ufeff';
-      const csvWithBom = bom + csvString;
-      const blob = new Blob([csvWithBom], { type: 'text/csv; charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-    
-  const now = new Date();
+  
+    const csvString = csvRows.join('\n');
+    const bom = '\ufeff';
+    const csvWithBom = bom + csvString;
+    const blob = new Blob([csvWithBom], { type: 'text/csv; charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+  
+　const now = new Date();
   const yyyy = now.getFullYear();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const dd = String(now.getDate()).padStart(2, '0');
   const dateString = `${yyyy}${mm}${dd}`;
   const filename = `bookrecords_${dateString}.csv`;
+  
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    fetchAllBookData();
     
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-      
 document.addEventListener('DOMContentLoaded', function() {
       const listItems = document.querySelectorAll('#myList > li');
       const count = listItems.length;
@@ -404,8 +450,5 @@ document.addEventListener('DOMContentLoaded', function() {
       resultDiv.innerText = 'r/d: ' + average.toFixed(5);
 });
 </script>
-</script>
-</body>
-</html>
 </body>
 </html>
