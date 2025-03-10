@@ -475,7 +475,7 @@
           setTimeout(() => resolve(fetchAllBookData()), 2000);
         });
       } else {
-        alert("すべての書籍の情報取得が完了しました");
+        alert("書籍の情報取得が完了しました。CSVがダウンロードできます。");
         return;
       }
     }
@@ -483,7 +483,7 @@
     async function download() {
       const listItems = document.querySelectorAll('#myList > li');
       const csvRows = [];
-      csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版日', '説明/目次'].join(','));
+      csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版日', '説明/目次(不正確な可能性があります。)'].join(','));
     
       for (const item of listItems) {
         const text = item.textContent;
