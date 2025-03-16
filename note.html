@@ -306,7 +306,7 @@
                   publisher = matchingItem.volumeInfo.publisher;
                 }
                 if ((!pubdate || pubdate === "null") && matchingItem.volumeInfo.publishedDate) {
-                  pubdate = matchingItem.volumeInfo.publishedDate;
+                  pubdate = convertPubdate(matchingItem.volumeInfo.publishedDate);
                 }
                 bookId = matchingItem.id;
               }
@@ -325,7 +325,7 @@
                 publisher = volumeInfo.publisher;
               }
               if ((!pubdate || pubdate === "null") && volumeInfo.publishedDate) {
-                pubdate = volumeInfo.publishedDate;
+                pubdate = convertPubdate(volumeInfo.publishedDate);
               }
             }
           }
@@ -398,7 +398,7 @@
   async function download() {
     const listItems = document.querySelectorAll('#myList > li');
     const csvRows = [];
-    csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版日', '説明/目次'].join(','));
+    csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版月', '説明/目次'].join(','));
   
     for (const item of listItems) {
       const text = item.textContent;
