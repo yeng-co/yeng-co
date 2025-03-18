@@ -105,6 +105,6 @@ function updateClock() {
 const hands = createClock();
 
 
-setInterval(updateClock, 100);
+setInterval(updateClock, 50);
 updateClock();
 
