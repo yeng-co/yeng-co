@@ -1,5 +1,5 @@
 // The following link is my annotation of the Philosophy.
-// "https://www.dropbox.com/scl/fi/5pw48udryhdypjqfdhw56/.PDF.pdf?rlkey=r7h94r3dv7pnn0kgivahq2poq&st=9n4j33rx&dl=0"
+// "https://www.dropbox.com/scl/fi/5pw48udryhdypjqfdhw56/.pdf?rlkey=r7h94r3dv7pnn0kgivahq2poq&st=1wl690h0&dl=0"
 
 function toBase12(num) {
     if (num === 0) return "0";
