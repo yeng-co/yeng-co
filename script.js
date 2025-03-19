@@ -1,3 +1,4 @@
+//"https://www.dropbox.com/scl/fi/h69ggmddr2i5alnvqa5z6/.PDF?rlkey=e2hs394mlrhihgh7178u7v46f&st=938x1cdv&dl=0"
 function toBase12(num) {
     if (num === 0) return "0";
     const digits = "0123456789AB";
