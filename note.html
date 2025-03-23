@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html class="jrboxfutp idc0_350">
 <head>
@@ -165,6 +164,28 @@
       display: block;
       width: fit-content;
     }
+    
+    #notification {
+      opacity: 0;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 9999;
+    }
+    .show {
+      animation: fadeInOut 3s forwards;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -187,7 +208,7 @@
   <h2>読書記録</h2>
   <center>
      <a href="book_2024.html">読書記録_2024</a>
-   </center>
+  </center>
   <h3>読書記録(2025/01/01~)</h3>
   <center>
     <div class="scrollable-list">
@@ -225,6 +246,7 @@
     </div>
     <div id="result" style="font-size: 20px; margin-top: 10px;"></div>
   </center>
+  <div id="notification">書籍の情報取得が完了しました。CSVがダウンロードできます。</div>
   <button class="button" onclick="download()">読書記録をダウンロード(CSV)</button>
 
 <script>
@@ -392,9 +414,17 @@
         setTimeout(() => resolve(fetchAllBookData()), 2000);
       });
     } else {
-      alert("書籍の情報取得が完了しました。CSVがダウンロードできます。");
+      showNotification();
       return;
     }
+  }
+  
+  function showNotification() {
+    const notification = document.getElementById("notification");
+    notification.classList.add("show");
+    setTimeout(() => {
+      notification.classList.remove("show");
+    }, 3000);
   }
   
   async function download() {
@@ -469,7 +499,6 @@
     resultDiv.innerText = 'r/d: ' + average.toFixed(5);
   });
 </script>
-
   
 </body>
 </html>
