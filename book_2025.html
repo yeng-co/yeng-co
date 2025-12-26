@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html class="jrboxfutp idc0_350">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>墓場 - 読書記録_2024</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
+
+    body {
+      background-color: white;
+      font-size: 90%;
+      font-family: 'M PLUS 1p', sans-serif;
+    }
+    .header {
+      background-color: white;
+      font-size: 30px;
+      color: #000;
+      text-align: left;
+    }
+    .nav-menu {
+      overflow: hidden;
+      background-color: black;
+    }
+    .nav-menu a {
+      font-size: 15px;
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    .nav-menu b {
+      font-size: 15px;
+      float: left;
+      display: white;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      background-color: white;
+    }
+    .nav-menu a:hover {
+      background-color: white;
+      color: black;
+      text-decoration: none;
+    }
+    .nav-menu .note {
+      font-size: 15px;
+      float: left;
+      display: #43cbb5;
+      color: #43cbb5;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      background-color: black;
+    }
+    .nav-menu .note:hover {
+      background-color: white;
+      color: #43cbb5;
+      text-decoration: underline;
+    }
+    .nav-menu .git {
+      font-size: 15px;
+      float: left;
+      display: #f34e29;
+      color: #f34e29;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      background-color: black;
+    }
+    .nav-menu .git:hover {
+      background-color: white;
+      color: #f34e29;
+      text-decoration: underline;
+    }
+    .nav-menu .music {
+      font-size: 15px;
+      float: left;
+      color: #fa2d48;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      background-color: black;
+    }
+    .nav-menu .music:hover {
+      background-color: white;
+      color: #fa2d48;
+      text-decoration: underline;
+    }
+    li {
+      font-size: 22px;
+      color: black;
+    }
+    h1 {
+      font-family: "Hina Mincho", serif;
+    }
+    hr {
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+    h2 {
+      font-family: "Hina Mincho", serif;
+      font-size: 30px;
+      color: black;
+      text-align: center;
+    }
+    h3 {
+      font-size: 24px;
+      color: black;
+      border: 4px solid black;
+      border-radius: 20px;
+      padding: 5px;
+      margin: 10px 0;
+      text-align: center;
+      font-weight: normal;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+    }
+    .scrollable-list {
+      width: 80%;
+      height: 500px;
+      overflow-y: scroll;
+      background-color: #dddddd;
+      padding: 15px;
+      border: 4px solid black; 
+      border-radius: 20px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    crollable-list::-webkit-scrollbar {
+      display: none;
+    }
+    ol {
+      padding-left: 20px;
+      margin: 25px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      text-align: left;
+    }
+    .button {
+      display: inline-block;
+      padding: 7px 20px; 
+      border: 3px solid #000000;
+      border-radius: 40px;
+      font-family: "M PLUS 1p", sans-serif;
+      color: black;
+      background-color: white;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 18px; 
+      font-weight: 600;
+      margin: auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: block;
+      width: fit-content;
+    }
+
+    #notification {
+      opacity: 0;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      z-index: 9999;
+    }
+    .show {
+      animation: fadeInOut 3s forwards;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>墓場</h1>
+    <hr size="10px" color="black">
+  </div>
+
+  <div class="nav-menu">
+    <a href="index.html">ホーム</a>
+    <a href="profile.html">プロフィール</a>
+    <a href="note.html">読書記録</a>
+    <a href="clock.html">時計</a>
+    <a href="banner.html">バナー</a>
+    <a class="music" href="https://music.apple.com/jp/playlist/%E8%89%AF%E3%81%84%E9%9F%B3%E6%A5%BD/pl.u-b3b8RMeSKrk07Pk" target="_blank" rel="noopener noreferrer">プレイリスト</a>
+    <a class="git" href="https://github.com/Yeng-Co" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+  <hr size="10px" color="black">
+  <h2>読書記録_2024</h2>
+
+  <h3>読書記録(2024/01/01~2024/12/31)</h3>
+  <center>
+    <div class="scrollable-list">
+      <ol id="myList" class="hidden" reversed="reversed">
+        <li data-isbn="9784314008693">ジャン・ボードリヤール『湾岸戦争は起こらなかった』</li>
+        <li data-isbn="9784309209395">トマス・リゴッティ『悪夢工場』</li>
+        <li data-isbn="9784778319069">波木銅『ニュー・サバービア』</li>
+        <li data-isbn="9784003279274">J・L・ボルヘス『ブロディーの報告書』</li>
+        <li data-isbn="9784103557319">朝比奈秋『サンショウウオの四十九日』</li>
+        <li data-isbn="9784791777396">ユージーン・サッカー『この惑星の塵のなかで：哲学のホラー』</li>
+        <li data-isbn="9784003279267">J・L・ボルヘス『汚辱の世界史』</li>
+        <li data-isbn="9784152103321">マーティン・エイミス『関心領域』</li>
+        <li data-isbn="9784087606249">J・L・ボルヘス『砂の本』</li>
+        <li data-isbn="9784480513267">ダニエル・C・デネット『自由は進化する』</li>
+        <li data-isbn="9784152103871">劉慈欣『時間移民』</li>
+        <li data-isbn="9784003279281">J・L・ボルヘス『アレフ』</li>
+        <li data-isbn="9784309231112">ニック・ランド『絶滅への渇望：ジョルジュ・バタイユと伝染性ニヒリズム』</li>
+        <li data-isbn="9784152099730">マルク・デュガン『透明性』</li>
+        <li data-isbn="9784757140509">ジャン・ボードリヤール『パワー・インフェルノ：グローバル・パワーとテロリズム』</li>
+        <li data-isbn="9784480098405">ジョルジュ・バタイユ『呪われた部分』</li>
+        <li data-isbn="9784309039367">飛浩隆『鹽津城』</li>
+        <li data-isbn="9784480056818">酒井健『バタイユ入門』</li>
+        <li data-isbn="9784122066212">ブレーズ・パスカル『パンセ』</li>
+        <li data-isbn="9784575319019">フェイクドキュメンタリーQ『フェイクドキュメンタリーQ』</li>
+        <li data-isbn="9784150102524">アーシュラ・K・ル・グィン『闇の左手』</li>
+        <li data-isbn="9784488746063">ピーター・ワッツ『6600万年の革命』</li>
+        <li data-isbn="9784003420935">マックス・ヴェーバー『プロテスタンティズムの倫理と資本主義の精神』</li>
+        <li data-isbn="9784150316037">日本SF作家クラブ『恐怖とSF』</li>
+        <li data-isbn="9784336073198">アレイスター・クロウリー『法の書』</li>
+        <li data-isbn="9784488696139">フィリップ・Ｋ・ディック『アルベマス』</li>
+        <li data-isbn="9784336075437">Hieros Phoenix『必修魔術論：アレイスター・クロウリーと〈大いなる作業〉』</li>
+        <li data-isbn="9784150103965">フィリップ・Ｋ・ディック『火星のタイム・スリップ』</li>
+        <li data-isbn="9784309762067">吉村正和『図説 近代魔術』</li>
+        <li data-isbn="9784336047427">サミュエル・R・ディレイニー『ダールグレンⅡ』</li>
+        <li data-isbn="9784336047410">サミュエル・R・ディレイニー『ダールグレンⅠ』</li>
+        <li data-isbn="9784588099113">ジャン・ボードリヤール『シミュラークルとシミュレーション』</li>
+        <li data-isbn="9784150120405">フィリップ・Ｋ・ディック『ティモシー・アーチャーの転生』</li>
+        <li data-isbn="9784488796013">ギョルゲ・ササルマン『方形の円：偽説・都市生成論』</li>
+        <li data-isbn="9784480080134">ジャン・ボードリヤール『象徴交換と死』</li>
+        <li data-isbn="9784150119881">フィリップ・Ｋ・ディック『聖なる侵入』</li>
+        <li data-isbn="9784480685162">牧野智和『社会は「私」をどうかたちづくるのか』</li>
+        <li data-isbn="9784488746056">ピーター・ワッツ『巨星』</li>
+        <li data-isbn="9784150119591">フィリップ・Ｋ・ディック『ヴァリス』</li>
+        <li data-isbn="9784479393818">木澤佐登志『失われた未来を求めて』</li>
+        <li data-isbn="9784150105044">アルカジイ＆ボリス・ストルガツキー『ストーカー』</li>
+        <li data-isbn="9784004120100">松浪信三郎『実存主義』</li>
+        <li data-isbn="9784336050267">M・ジョン・ハリスン『ライト』</li>
+        <li data-isbn="9784062586702">マルクス・ガブリエル『なぜ世界は存在しないのか』</li>
+        <li data-isbn="9784309464237">ティムール・ヴェルメシュ『帰ってきたヒトラー 下』</li>
+        <li data-isbn="9784309206400">ティムール・ヴェルメシュ『帰ってきたヒトラー 上』</li>
+        <li data-isbn="9784309462752">アントナン・アルトー『神の裁きと訣別するため』</li>
+        <li data-isbn="9784488746049">ピーター・ワッツ『エコープラクシア 下』</li>
+        <li data-isbn="9784488746032">ピーター・ワッツ『エコープラクシア 上』</li>
+        <li data-isbn="9784326102624">佐藤岳詩『メタ倫理学入門: 道徳のそもそもを考える』</li>
+        <li data-isbn="9784152090034">チャールズ・ストロス『アッチェレランド 』</li>
+        <li data-isbn="9784910511313">マーク・フィッシャー『奇妙なものとぞっとするもの──小説・映画・音楽、文化論集』</li>
+        <li data-isbn="9784150123673">デイヴィッド・ウェリントン『最後の宇宙飛行士』</li>
+        <li data-isbn="9784336046215">オラフ・ステープルドン『スターメイカー』</li>
+        <li data-isbn="9784046075598">夜馬裕『イシナガキクエを探しています』</li>
+        <li data-isbn="9784314001472">E・M・シオラン『生誕の災厄』</li>
+        <li data-isbn="9784041163641">灰谷魚『レモネードに彗星』</li>
+        <li data-isbn="9784102052129">ガブリエル・ガルシア=マルケス『百年の孤独』</li>
+        <li data-isbn="9784488746025">ピーター・ワッツ『ブラインドサイト 下』</li>
+        <li data-isbn="9784488746018">ピーター・ワッツ『ブラインドサイト 上』</li>
+        <li data-isbn="9784101257716">円城塔『これはペンです』</li>
+        <li data-isbn="9784877281717">庵野秀明『THE END OF EVANGELION：僕という記号』</li>
+        <li data-isbn="9784167834012">円城塔『オブ・ザ・ベースボール』</li>
+        <li data-isbn="null">梨『恐怖症店』</li>
+        <li data-isbn="9784004202462">図書編集部 編『私の読書』</li>
+        <li data-isbn="9784004203247">図書編集部 編『書斎の王様』</li>
+        <li data-isbn="9784488612047">レイ・ブラッドベリ『スは宇宙のス』</li>
+        <li data-isbn="9784576220673">柴田勝家『スーサイドホーム』</li>
+        <li data-isbn="9784763141811">増本淳『フロントライン』</li>
+        <li data-isbn="9784022650092">吉田修一『国宝 下』</li>
+        <li data-isbn="9784022650085">吉田修一『国宝 上』</li>
+        <li data-isbn="9784153350151">チャールズ・ユウ『SF的な宇宙で安全に暮らすっていうこと』</li>
+        <li data-isbn="9784003363966">フリードリヒ・ニーチェ『この人を見よ』</li>
+        <li data-isbn="9784065266595">酒井隆史『ブルシット・ジョブの謎』</li>
+        <li data-isbn="9784065401354">烏谷昌幸『となりの陰謀論』</li>
+        <li data-isbn="9784121027726">春日武彦『恐怖の正体』</li>
+        <li data-isbn="9784121006745">木村敏『時間と自己』</li>
+        <li data-isbn="9784309417332">二階堂奥歯『八本脚の蝶』</li>
+        <li data-isbn="9784150124786">倪雪婷 編『宇宙墓碑 現代中国SFアンソロジー』</li>
+        <li data-isbn="9784909483188">マーク・フィッシャー『わが人生の幽霊たち――うつ病、憑在論、失われた未来』</li>
+        <li data-isbn="9784199050480">小中千昭『深淵を歩くもの』</li>
+        <li data-isbn="9784591185674">葉山透『アイギス』</li>
+        <li data-isbn="9784480082268">西垣通『思考機械——太古と未来をつなぐ知』</li>
+        <li data-isbn="9784120059001">柴田勝家『秘曲金色姫』</li>
+        <li data-isbn="9784622004813">ロラン・バルト『物語の構造分析』</li>
+        <li data-isbn="9784152080653">イアン・バンクス『フィアサム・エンジン』</li>
+        <li data-isbn="9784791776597">木澤佐登志『終わるまではすべてが永遠：崩壊を巡るいくつかの欠片』</li>
+        <li data-isbn="9784103311638">円城塔『去年、本能寺で』</li>
+        <li data-isbn="9784480512970">E・M・シオラン『崩壊概論』</li>
+        <li data-isbn="9784865280968">マーク・フィッシャー『ポスト資本主義の欲望』</li>
+        <li data-isbn="null">藤琉『聖武天皇素数秘史』</li>
+        <li data-isbn="9784152104199">天沢時生『すべての原付の光』</li>
+        <li data-isbn="9784314011167">ジャン・ボードリヤール『消費社会の神話と構造』</li>
+        <li data-isbn="9784152104137">人間六度『烙印の名はヒト』</li>
+        <li data-isbn="9784791769902">ダナ・ハラウェイ『猿と女とサイボーグ：自然の再発明』</li>
+        <li data-isbn="9784480426963">トマス・ピンチョン『競売ナンバー49の叫び』</li>
+        <li data-isbn="9784622078838">ノーバート・ウィーナー『人間機械論 第2版：人間の人間的な利用』</li>
+        <li data-isbn="9784152104038">神林長平『インサイト 戦闘妖精・雪風』</li>
+        <li data-isbn="9784480512499">小河原誠『ポパー〔第2版〕』</li>
+        <li data-isbn="null">梨『此岸』</li>
+        <li data-isbn="9784409030905">カンタン・メイヤスー『有限性の後で：偶然性の必然性についての試論』</li>
+        <li data-isbn="9784041152447">梨・FEAR飯『禍話n』</li>
+        <li data-isbn="9784909237354">マーク・フィッシャー『資本主義リアリズム：「この道しかない」のか』</li>
+        <li data-isbn="9784003279212">J・L・ボルヘス『伝奇集』</li>
+        <li data-isbn="9784480858108">チャイナ・ミエヴィル『オクトーバー：物語ロシア革命』</li>
+        <li data-isbn="9784815619091">GA Graphic『戦闘妖精雪風 デザイナーズノート』</li>
+        <li data-isbn="9784588006579">ノルベルト・ボルツ『グーテンベルク銀河系の終焉：新しいコミュニケーションのすがた』</li>
+        <li data-isbn="9784622018964">マーシャル・マクルーハン『グーテンベルクの銀河系：活字人間の形成』</li>
+        <li data-isbn="9784150119119">チャイナ・ミエヴィル『クラーケン 下』</li>
+        <li data-isbn="9784150119102">チャイナ・ミエヴィル『クラーケン 上』</li>
+        <li data-isbn="9784781617411">木澤佐登志『ダークウェブ・アンダーグラウンド：社会秩序を逸脱するネット暗部の住人たち』</li>
+        <li data-isbn="9784309209203">ジャミル・ジャン・コチャイ『きみはメタルギアソリッドV：ファントムペインをプレイする』</li>
+        <li data-isbn="9784480083470">ロラン・バルト『エッフェル塔』</li>
+        <li data-isbn="9784150124694">デュナ『カウンターウェイト』</li>
+        <li data-isbn="9784409031094">グレアム・ハーマン『思弁的実在論入門』</li>
+        <li data-isbn="9784003104668">志賀直哉・高橋英夫編『志賀直哉随筆集』</li>
+        <li data-isbn="9784863856011">中村達『私が諸島である：カリブ海思想入門』</li>
+        <li data-isbn="9784150123550">ニール・スティーヴンスン『スノウ・クラッシュ〔新版〕下』</li>
+        <li data-isbn="9784150123543">ニール・スティーヴンスン『スノウ・クラッシュ〔新版〕上』</li>
+        <li data-isbn="9784065160145">木澤佐登志『ニック・ランドと新反動主義：現代世界を覆う“ダーク”な思想』</li>
+        <li data-isbn="9784022520395">鈴木 結生『ゲーテはすべてを言った』</li>
+        <li data-isbn="9784065197035">ニック・ランド『暗黒の啓蒙書』</li>
+        <li data-isbn="9784150124311">デイヴィッド・ウェリントン『妄想感染体 下』</li>
+        <li data-isbn="9784150124304">デイヴィッド・ウェリントン『妄想感染体 上』</li>
+        <li data-isbn="9784314011662">フェルナンド・バエス『書物の破壊の世界史：シュメールの粘土板からデジタル時代まで』</li>
+        <li data-isbn="9784336076809">ヘルベルト・ローゼンドルファー『廃墟建築家』</li>
+        <li data-isbn="9784065376225">佐藤究『トライロバレット』</li>
+        <li data-isbn="9784480512840">ウィトゲンシュタイン『色彩について』</li>
+        <li data-isbn="9784150118549">チャイナ・ミエヴィル『ペルディード・ストリート・ステーション 下』</li>
+        <li data-isbn="9784150118532">チャイナ・ミエヴィル『ペルディード・ストリート・ステーション 上』</li>
+        <li data-isbn="9784480089366">ロラン・バルト『映像の修辞学』</li>
+        <li data-isbn="9784150313180">カルロ・ゼン『ヤキトリ2 Broken Toy Soldier』</li>
+        <li data-isbn="9784150312800">カルロ・ゼン『ヤキトリ1 一銭五厘の軌道降下』</li>
+        <li data-isbn="9784153400269">小宮山功一朗・小泉悠『サイバースペースの地政学』</li>
+        <li data-isbn="9784150306342">神林長平『魂の駆動体』</li>
+      </ol>
+    </div>
+    <div id="result" style="font-size: 20px; margin-top: 10px;"></div>
+  </center>
+  <div id="notification">書籍の情報取得が完了しました。<br>読書記録をダウンロードできます。</div>
+  <button class="button" onclick="download()">読書記録をダウンロード(CSV)</button>
+
+<script>
+  function convertPubdate(pubdate) {
+    const digits = pubdate.replace(/\D/g, '');
+    if (digits.length >= 6) {
+      return digits.substring(0, 4) + "-" + digits.substring(4, 6);
+    } else if (digits.length === 4) {
+      return digits + "-01";
+    } else {
+      return pubdate; 
+    }
+  }
+  
+  async function fetchBookData(item) {
+    const isbn = item.getAttribute('data-isbn');
+    if (!isbn || isbn === "null") {
+      item.dataset.confirmed = "true";
+      return;
+    }
+    
+    const cleanIsbn = isbn.replace(/-/g, '');
+    
+    try {
+      let publisher = "null";
+      let pubdate = "null";
+      let description = "";
+      let descSource = "";
+      
+      const response = await fetch(`https://api.openbd.jp/v1/get?isbn=${cleanIsbn}`);
+      if (response.ok) {
+        const data = await response.json();
+        if (Array.isArray(data) && data.length > 0 && data[0] !== null) {
+          const summary = data[0].summary;
+          publisher = summary.publisher;
+          if (!publisher || publisher.trim() === "") {
+            publisher = summary.series;
+          }
+          publisher = (publisher && publisher.trim() !== "") ? publisher : "null";
+          
+          let openbdPubdate = summary.pubdate;
+          if (openbdPubdate && openbdPubdate.trim() !== "") {
+            pubdate = convertPubdate(openbdPubdate);
+          }
+          
+          if (summary.description && summary.description.trim() !== "") {
+            description = summary.description;
+            descSource = "openBD";
+          } else if (data[0].onix && data[0].onix.CollateralDetail && data[0].onix.CollateralDetail.TextContent) {
+            const texts = data[0].onix.CollateralDetail.TextContent;
+            if (Array.isArray(texts)) {
+              description = texts.map(textItem => textItem.Text).join(" ");
+              descSource = "openBD";
+            }
+          }
+        }
+      }
+      
+      if (!description || description.trim() === "") {
+        try {
+          let bookId = null;
+          const searchResponse = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${cleanIsbn}&projection=full`);
+          if (searchResponse.ok) {
+            const searchData = await searchResponse.json();
+            if (searchData.totalItems > 0 && searchData.items && searchData.items.length > 0) {
+              const matchingItem = searchData.items.find(book => {
+                if (book.volumeInfo && book.volumeInfo.industryIdentifiers) {
+                  return book.volumeInfo.industryIdentifiers.some(identifier => 
+                    identifier.identifier.replace(/-/g, '') === cleanIsbn
+                  );
+                }
+                return false;
+              }) || searchData.items[0];
+              
+              if (matchingItem && matchingItem.volumeInfo) {
+                if (matchingItem.volumeInfo.description && matchingItem.volumeInfo.description.trim() !== "") {
+                  description = matchingItem.volumeInfo.description;
+                  descSource = "Google Books";
+                }
+                if ((!publisher || publisher === "null") && matchingItem.volumeInfo.publisher) {
+                  publisher = matchingItem.volumeInfo.publisher;
+                }
+                if ((!pubdate || pubdate === "null") && matchingItem.volumeInfo.publishedDate) {
+                  pubdate = convertPubdate(matchingItem.volumeInfo.publishedDate);
+                }
+                bookId = matchingItem.id;
+              }
+            }
+          }
+          if (bookId) {
+            const detailResponse = await fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}?projection=full`);
+            if (detailResponse.ok) {
+              const detailData = await detailResponse.json();
+              const volumeInfo = detailData.volumeInfo;
+              if (volumeInfo && volumeInfo.description && volumeInfo.description.trim() !== "") {
+                description = volumeInfo.description;
+                descSource = "Google Books";
+              }
+              if ((!publisher || publisher === "null") && volumeInfo.publisher) {
+                publisher = volumeInfo.publisher;
+              }
+              if ((!pubdate || pubdate === "null") && volumeInfo.publishedDate) {
+                pubdate = convertPubdate(volumeInfo.publishedDate);
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Google Books APIのデータ取得エラー:", error);
+        }
+      }
+      
+      if (description) {
+        description = description.replace(/[\r\n]+/g, "/");
+        if (descSource) {
+          description += " (" + descSource + ")";
+        }
+      }
+      
+      item.dataset.publisher = publisher;
+      item.dataset.pubdate = pubdate;
+      item.dataset.description = (description && description.trim() !== "") ? description : "null";
+      item.dataset.confirmed = "true"; 
+    } catch (error) {
+      console.error("書籍のデータ取得エラー:", error);
+    }
+  }
+  
+  async function fetchAllBookData() {
+    const listItems = document.querySelectorAll('#myList > li');
+    let needRetry = false;
+    const maxRetries = 4;
+    const promises = Array.from(listItems).map(async (item) => {
+      const isbn = item.getAttribute('data-isbn');
+      if (isbn) {
+        if (!item.dataset.retryCount) {
+          item.dataset.retryCount = "0";
+        }
+        if (item.dataset.confirmed !== "true") {
+          await fetchBookData(item);
+          if (item.dataset.confirmed !== "true") {
+            let count = parseInt(item.dataset.retryCount, 10);
+            count++;
+            item.dataset.retryCount = count.toString();
+            if (count < maxRetries) {
+              needRetry = true;
+            } else {
+              item.dataset.confirmed = "true";
+              if (!item.dataset.publisher) {
+                item.dataset.publisher = "null";
+              }
+              if (!item.dataset.pubdate) {
+                item.dataset.pubdate = "null";
+              }
+              if (!item.dataset.description) {
+                item.dataset.description = "null";
+              }
+            }
+          }
+        }
+      }
+    });
+    await Promise.all(promises);
+    if (needRetry) {
+      return new Promise(resolve => {
+        setTimeout(() => resolve(fetchAllBookData()), 2000);
+      });
+    } else {
+        showNotification();
+        return;
+    }
+  }
+  
+  function showNotification() {
+    const notification = document.getElementById("notification");
+    notification.classList.add("show");
+    setTimeout(() => {
+      notification.classList.remove("show");
+    }, 3000);
+  }
+
+  async function download() {
+    const listItems = document.querySelectorAll('#myList > li');
+    const csvRows = [];
+    csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版月', '説明/目次'].join(','));
+  
+    for (const item of listItems) {
+      const text = item.textContent;
+      const isbn = item.getAttribute('data-isbn');
+      const match = text.match(/^(.+?)『(.+)』$/);
+      if (match) {
+        const author = match[1].trim();
+        const title = match[2].trim();
+        let publisher = isbn ? (item.dataset.publisher || "null") : "null";
+        let pubdate = isbn ? (item.dataset.pubdate || "null") : "null";
+        let description = isbn ? (item.dataset.description || "null") : "null";
+  
+        const escapeCsvField = (field) => {
+          if (field.includes('"')) {
+            field = field.replace(/"/g, '""');
+          }
+          if (field.includes(',') || field.includes('"') || field.includes('\n')) {
+            field = `"${field}"`;
+          }
+          return field;
+        };
+  
+        csvRows.push([
+          escapeCsvField(author),
+          escapeCsvField(title),
+          escapeCsvField(isbn || ""),
+          escapeCsvField(publisher),
+          escapeCsvField(pubdate),
+          escapeCsvField(description)
+        ].join(','));
+      }
+    }
+  
+    const csvString = csvRows.join('\r\n');
+    const bom = '\ufeff';
+    const csvWithBom = bom + csvString;
+    const blob = new Blob([csvWithBom], { type: 'text/csv; charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+
+    const filename = `bookrecords_2024.csv`;
+  
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    fetchAllBookData();
+    const listItems = document.querySelectorAll('#myList > li');
+    const count = listItems.length;
+    const start = new Date('2025-01-01');
+    const end = new Date('2025-12-31');
+    const diffTime = Math.abs(end - start);
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    const average = count / days;
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerText = 'r/d: ' + average.toFixed(5);
+  });
+</script>
+</body>
+</html>
