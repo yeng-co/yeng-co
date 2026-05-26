@@ -462,8 +462,8 @@
         setTimeout(() => resolve(fetchAllBookData()), 2000);
       });
     } else {
-      showNotification();
-      return;
+        showNotification();
+        return;
     }
   }
   
@@ -474,14 +474,14 @@
       notification.classList.remove("show");
     }, 3000);
   }
-  
+
   async function download() {
     const listItems = document.querySelectorAll('#myList > li');
     const csvRows = [];
     csvRows.push(['著者', 'タイトル', 'ISBN', '出版社', '出版月', '説明/目次'].join(','));
   
     for (const item of listItems) {
-      const text = item.textContent.trim();
+      const text = item.textContent;
       const isbn = item.getAttribute('data-isbn');
       const match = text.match(/^(.+?)『(.+)』$/);
       if (match) {
@@ -517,13 +517,8 @@
     const csvWithBom = bom + csvString;
     const blob = new Blob([csvWithBom], { type: 'text/csv; charset=utf-8' });
     const url = URL.createObjectURL(blob);
-  
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
-    const dateString = `${yyyy}${mm}${dd}`;
-    const filename = `bookrecords_${dateString}.csv`;
+
+    const filename = `bookrecords_2024.csv`;
   
     const a = document.createElement('a');
     a.href = url;
@@ -535,12 +530,11 @@
   
   document.addEventListener("DOMContentLoaded", () => {
     fetchAllBookData();
-    
     const listItems = document.querySelectorAll('#myList > li');
     const count = listItems.length;
     const start = new Date('2026-01-01');
     const today = new Date();
-    const diffTime = today - start;
+    const diffTime = Math.abs(today - start);
     const days = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
     const average = count / days;
     const resultDiv = document.getElementById('result');
